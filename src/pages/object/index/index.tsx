@@ -18,11 +18,11 @@ const IndexPage: React.FC<Props> = () => {
   if (!data) return null
   return (
     <div className="flex flex-col-reverse md:flex-row h-[100vh] justify-between">
-      <div className="w-full md:w-[40%] h-[calc(100vh-400px)] md:h-full bg-[rgba(255,255,255,0.9)] shadow-md rounded-lg">
+      <div className="w-full flex-1 h-[calc(100vh-400px)] md:h-full bg-[rgba(255,255,255,0.9)] shadow-md rounded-lg">
         <SelectorSidebar parts={data.parts} />
       </div>
-      <div className="w-full md:w-[57%] flex justify-center">
-        <div className="w-full max-h-[400px]  md:h-full">
+      <div className="w-full flex-1 flex justify-center">
+        <div className="w-full md:max-h-[400px] md:h-full">
           <CanvasComponent parts={data.parts} />
         </div>
       </div>

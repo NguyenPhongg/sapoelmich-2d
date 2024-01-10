@@ -80,11 +80,11 @@ const SelectorSidebar: React.FC<Props> = ({ parts }) => {
         const item: TextValue = selectedStorage[id]
           ? { ...selectedStorage[id], [name]: value }
           : {
-            color: '',
-            value: '',
-            font: 'Arial',
-            [name]: value,
-          }
+              color: '',
+              value: '',
+              font: 'Arial',
+              [name]: value,
+            }
         return {
           ...selectedStorage,
           [id]: item,
@@ -131,59 +131,70 @@ const SelectorSidebar: React.FC<Props> = ({ parts }) => {
           <IoSettingsOutline />
         </button>
       </Teleport> */}
-      <div className='h-full selector-sidebar'>
-        <div className='md:block hidden'>
-          <div className='flex items-center border-b-2 border-silver pl-5'>
-            <div className='w-[70px]'>
+      <div className="h-full selector-sidebar">
+        <div className="md:block hidden">
+          <div className="flex items-center border-b-2 border-silver pl-5">
+            <div className="w-[70px]">
               <img src="/choose/pot.png" className="w-4/5" />
             </div>
-            <div className='text-[20px] font-semibold'>Nồi của bạn</div>
+            <div className="text-[20px] font-semibold">Nồi của bạn</div>
           </div>
         </div>
         <div
           className={classNames(
-            'flex flex-col-reverse md:flex-row md:h-[calc(100%-64px)] h-0',
+            'h-full min-w-fit lg:min-w-full flex justify-between flex-col-reverse md:flex-col lg:flex-row md:h-[calc(100%-64px)]',
             open ? 'open' : ''
           )}
         >
-          <ul className="w-full md:w-[30%] space-y-1 md:p-3 p-1 border-r-2 border-silver flex flex-row md:flex-col">
+          <ul className="min-w-fit w-full lg:w-[30%] lg:space-y-1 md:p-3 p-1 lg:border-r-2 lg:border-b-0 border-b-[1px] border-silver flex flex-row lg:flex-col">
             {[...parts, totalPart].map((part) => (
               <li
                 key={part.id}
                 data-id={part.id}
                 onClick={handleSelect}
                 className={classNames(
-                  'pl-0 md:pl-3 w-full md:w-full h-16 md:h-[60px] text-xs md:text-base hover:bg-gray-200 cursor-pointer flex-col',
-                  selectedPart.id === part.id ? 'md:border-l-2 md:border-b-0 border-b-2 border-primary text-primary font-semibold' : ''
+                  'pl-0 lg:pl-3 lg:pr-1 w-full h-full md:w-full min-h-12 md:min-h-16 lg:h-[60px] text-xs md:text-base hover:bg-gray-200 cursor-pointer flex items-center border-b-2 border-slate-300 md:border-b-0',
+                  selectedPart.id === part.id
+                    ? 'lg:border-l-2 lg:border-b-0 border-b-2 !border-primary text-primary font-semibold'
+                    : ''
                 )}
               >
                 {part.src ? (
-                  <div className='flex md:justify-start justify-center'>
-                    <img
-                      className="max-w-[60%] md:block hidden"
-                      width={40}
-                      height={40}
-                      src={part.src}
-                    />
-                    <div className='text-[15px] pt-4 md:pt-2 pl-0 md:pl-3'>{part.name}</div>
+                  <div className="flex md:flex-col lg:flex-row h-full md:justify-start items-center lg:items-start justify-center w-full">
+                    <div className=" max-w-[60%] min-w-10 h-10 md:flex hidden justify-center items-center">
+                      <img
+                        src={part.src}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                    <div className="min-w-fit text-[15px] lg:pt-2 pl-0 lg:pl-3">
+                      {part.name}
+                    </div>
                   </div>
-                ) : (<div className='text-[15px] pt-4 md:pt-0 flex justify-center items-center'>{part.name}</div>)}
+                ) : (
+                  <div className="w-full h-full text-[15px] md:pt-4 lg:pt-0 flex justify-center items-center">
+                    {part.name}
+                  </div>
+                )}
               </li>
             ))}
           </ul>
-          <div className="w-full md:w-[70%] selector-sidebar-container">
+          <div className="w-full lg:w-[70%] selector-sidebar-container h-full overflow-hidden">
             <button
               className="absolute top-1 z-10 right-1 text-3xl p-2 md:hidden bg-gray-100 rounded-full"
               onClick={toggleOpen}
             >
               <IoCloseOutline />
             </button>
-            <PerfectScrollbar className="h-full p-4 w-[calc(100vw-84px)] sm:w-auto">
+            {/* lg:w-[calc(100vw-84px)] */}
+            <PerfectScrollbar className="h-full max-h-full overflow-y-auto p-4 md:w-full sm:w-auto">
               {selectedPart.properties.length ? (
                 <ul className="space-y-2">
                   {selectedPart.properties.map((property) => (
                     <li key={property.id}>
-                      <div className='text-[17px] font-normal'>{property.name}</div>
+                      <div className="text-[17px] font-normal">
+                        {property.name}
+                      </div>
                       <PropertySelector
                         property={property}
                         selected={searchParams.get(property.id + '')}

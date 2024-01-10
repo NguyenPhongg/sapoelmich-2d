@@ -40,7 +40,7 @@ const CanvasComponent: React.FC<Props> = ({ parts }) => {
       canvas.current?.clear()
       if (selectedPart.id === 'total') {
         if (canvas.current) {
-          (async () => {
+          ;(async () => {
             for (const part of parts) {
               await drawImagePart(part)
               // parts.forEach((part) => drawImagePart(part))
@@ -91,7 +91,7 @@ const CanvasComponent: React.FC<Props> = ({ parts }) => {
     })
   }
   return (
-    <div ref={containerRef} className="w-full pt-[100%] relative">
+    <div ref={containerRef} className="w-full pt-[75%] md:pt-[100%] relative">
       <canvas
         ref={canvasRef}
         width={800}
